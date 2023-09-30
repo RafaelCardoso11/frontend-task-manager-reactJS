@@ -1,63 +1,62 @@
-import {
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ITask } from "../../interfaces/task.interface";
 import { DatePicker } from "../../components/DatePicker";
 import { PriorityEnum } from "../../enums/priority.enum";
+import { Select } from "../../components/Select/index";
+import { InputText } from "../../components/InputText";
+import { priorityItems } from "./priorityItems";
+import dayjs from "dayjs";
+import { useMutation } from "react-query";
+import { TaskService } from "../../services/Task";
 
+const { create } = new TaskService();
 export const Task = () => {
-  const { handleSubmit } = useForm<ITask>();
+  const { handleSubmit, control } = useForm<ITask>({
+    defaultValues: {
+      priority: PriorityEnum.LOW,
+    },
+  });
 
-  const onSubmit: SubmitHandler<ITask> = (data) => console.log(data);
+  const task = useMutation(create, {
+    onSuccess(data) {
+      console.log(data, "SUCESS");
+    },
+  });
+
+  const onSubmit: SubmitHandler<ITask> = (data) => task.mutate(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <TextField
-            required
-            name="title"
-            variant="outlined"
-            label="Titulo"
-            fullWidth
-          />
+          <InputText control={control} name="title" label="Titulo" />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <InputText
+            control={control}
             name="description"
-            variant="outlined"
-            label="Description"
-            fullWidth
+            label="Descrição da Tarefa"
             multiline
             minRows={4}
           />
         </Grid>
 
         <Grid item xs={6}>
-          <FormControl fullWidth>
-            <InputLabel>Prioridade</InputLabel>
-            <Select
-              name="title"
-              variant="outlined"
-              label="Prioridade"
-              color="primary"
-              defaultValue={PriorityEnum.LOW}
-            >
-              <MenuItem value={PriorityEnum.HIGH}>Alta</MenuItem>
-              <MenuItem value={PriorityEnum.MEDIUM}>Média</MenuItem>
-              <MenuItem value={PriorityEnum.LOW}>Baixa</MenuItem>
-            </Select>
-          </FormControl>
+          <Select
+            control={control}
+            name="priority"
+            label="Prioridade"
+            items={priorityItems}
+          />
         </Grid>
         <Grid item xs={6}>
-          <DatePicker label="Data de Conclusão" />
+          <DatePicker
+            control={control}
+            name="dueDate"
+            minDate={dayjs()}
+            label="Data de Conclusão"
+          />
         </Grid>
 
         <Grid
