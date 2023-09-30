@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Badge,
   Box,
   Button,
@@ -27,17 +28,20 @@ export const Header = () => {
       </IconButton>
 
       <Box>
-        <Button
-          variant="contained"
-          color="info"
-          style={{ marginRight: 20 }}
-        >
+        <Button variant="contained" color="info" style={{ marginRight: 20 }}>
           Cadastrar Tarefas
         </Button>
         <IconButton color="inherit">
           <Badge badgeContent={4} style={{ color: "white" }}>
             <NotificationsIcon />
           </Badge>
+        </IconButton>
+        <IconButton color="inherit">
+          <Avatar
+            alt="User Avatar"
+            src="https://media.licdn.com/dms/image/D4D03AQG534wNPHhang/profile-displayphoto-shrink_800_800/0/1682369927317?e=1701302400&v=beta&t=amZkkrDQVCGWy7HvQEmMCoewa1EZOPcaYmoNF_e_I_Q"
+
+          />
         </IconButton>
       </Box>
     </Toolbar>
