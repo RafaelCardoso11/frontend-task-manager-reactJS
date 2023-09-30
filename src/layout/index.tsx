@@ -1,6 +1,6 @@
 import { Divider, Grid } from "@mui/material";
 import { Header } from "./header";
-// import { Sidebar } from "./sidebar";
+import { Sidebar } from "./sidebar";
 import { Main } from "./main";
 import { Footer } from "./footer";
 
@@ -12,14 +12,14 @@ export const Layout = () => {
         <Divider />
       </Grid>
       <Grid container minHeight="100vh">
-        {/* <Grid
+        <Grid
           xs={2}
-          style={{ boxShadow: "5px 0px 5px 0px rgba(0,0,0,0.2)" }}
-          height="100%"
+          style={{ boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.2)" }}
+
         >
           <Sidebar />
-        </Grid> */}
-        <Grid xs={12} height="100%" container>
+        </Grid>
+        <Grid xs={10} container height="100%">
           <Main />
         </Grid>
       </Grid>
