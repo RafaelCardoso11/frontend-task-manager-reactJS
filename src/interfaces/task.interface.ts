@@ -1,9 +1,9 @@
 export interface ITask {
   id: number;
   title: string;
-  description: string;
+  description?: string;
   priority: string;
   dueDate: string;
-  completed: boolean;
-  createdAt: string;
+  completed?: boolean;
+  createdAt?: string;
 }
