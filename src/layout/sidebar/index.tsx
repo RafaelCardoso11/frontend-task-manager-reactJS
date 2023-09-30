@@ -1,4 +1,5 @@
 import {
+  Divider,
   Grid,
   List,
   ListItemButton,
@@ -18,6 +19,7 @@ export const Sidebar = () => {
           <ListItemText primary="Tarefas" />
         </ListItemButton>
       </List>
+      <Divider />
     </Grid>
   );
 };
