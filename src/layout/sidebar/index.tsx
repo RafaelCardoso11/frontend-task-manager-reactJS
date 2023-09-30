@@ -7,11 +7,10 @@ import {
   ListItemText,
 } from "@mui/material";
 
-
 import { Task } from "@mui/icons-material";
 export const Sidebar = () => {
   return (
-    <Grid  >
+    <Grid item>
       <List component="nav">
         <ListItemButton>
           <ListItemIcon>
