@@ -7,14 +7,15 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import DashboardIcon from "@mui/icons-material/Dashboard";
+
+import { Task } from "@mui/icons-material";
 export const Sidebar = () => {
   return (
     <Grid  >
       <List component="nav">
         <ListItemButton>
           <ListItemIcon>
-            <DashboardIcon />
+            <Task />
           </ListItemIcon>
           <ListItemText primary="Tarefas" />
         </ListItemButton>
