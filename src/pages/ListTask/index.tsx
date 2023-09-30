@@ -1,36 +1,28 @@
-import { Box} from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { useState } from "react";
 
 import { DataGrid, ptBR } from "@mui/x-data-grid";
 
 import { ITask } from "../../interfaces/task.interface";
 import { columns } from "./columns";
+import { useQuery } from "react-query";
+import { TaskService } from "../../services/Task";
+
+const { completeMultipleTask, findAll } = new TaskService();
 
 export const List = () => {
-  const [tasks, setTasks] = useState<ITask[]>([]);
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
 
-  useEffect(() => {
-    const handleFetch = async () => {
-      const {
-        data: { data },
-      } = await axios.get("http://localhost:3000/task");
-
-      const tasks: ITask[] = data;
-      setTasks(tasks);
+  const { data: tasks } = useQuery<ITask[]>("task", findAll, {
+    onSuccess(tasks) {
       setSelectedRows(
         tasks.filter(({ completed }) => completed).map(({ id }) => id)
       );
-    };
-    handleFetch();
-  }, []);
+    },
+  });
 
-  const handleSelectedRows = async (ids: number[]) => {
-    await axios.patch("http://localhost:3000/task/completeTasks", {
-      taskIds: ids,
-    });
-  };
+  const handleSelectedRows = async (ids: number[]) =>
+    await completeMultipleTask(ids);
 
   return (
     <Box
@@ -42,7 +34,7 @@ export const List = () => {
       }}
     >
       <DataGrid
-        rows={tasks}
+        rows={tasks || []}
         columns={columns}
         localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
         rowSelectionModel={selectedRows}
