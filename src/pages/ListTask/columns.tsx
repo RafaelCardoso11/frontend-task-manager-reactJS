@@ -1,8 +1,9 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { PriorityEnum } from "../../enums/priority.enum";
-import { Chip, Grid, IconButton, Stack } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Chip, Grid, IconButton, Stack } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { formatterDate } from "../../helpers/formatterDate";
 
 export const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 150 },
@@ -43,7 +44,7 @@ export const columns: GridColDef[] = [
     minWidth: 150,
     renderCell(params) {
       const date = params.row.createdAt;
-      return new Date(date).toLocaleDateString("pt-BR");
+      return formatterDate(date);
     },
   },
   {
@@ -53,7 +54,7 @@ export const columns: GridColDef[] = [
     minWidth: 150,
     renderCell(params) {
       const date = params.row.dueDate;
-      return new Date(date).toLocaleDateString("pt-BR");
+      return formatterDate(date);
     },
   },
   {
