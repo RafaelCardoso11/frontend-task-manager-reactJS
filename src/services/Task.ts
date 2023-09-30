@@ -2,11 +2,11 @@ import axios from "./api";
 import { ITask } from "../interfaces/task.interface";
 
 export class TaskService {
-  private readonly base = "task";
+   readonly base = "task";
 
   async create(task: ITask) {
     const {
-      data: { data },
+      data,
     } = await axios.post(this.base, task);
 
     return data;
