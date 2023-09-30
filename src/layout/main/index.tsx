@@ -1,38 +1,110 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Chip, Grid, IconButton, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ITask } from "../../interfaces/task.interface";
+import { DataGrid, GridColDef, ptBR } from "@mui/x-data-grid";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { PriorityEnum } from "../../enums/priority.enum";
+
+const columns: GridColDef[] = [
+  { field: "id", headerName: "ID", minWidth: 150 },
+  { field: "title", headerName: "Titulo", minWidth: 150 },
+  { field: "description", headerName: "Descrição", minWidth: 160 },
+  {
+    field: "priority",
+    headerName: "Prioridade",
+    renderCell(params) {
+      const colorFromPriority =
+        params.row.priority === PriorityEnum.HIGH
+          ? "error"
+          : params.row.priority === PriorityEnum.MEDIUM
+          ? "warning"
+          : "primary";
+
+      const labelFromPriority =
+        params.row.priority === PriorityEnum.HIGH
+          ? "Alta"
+          : params.row.priority === PriorityEnum.MEDIUM
+          ? "Media"
+          : "Baixa";
+      return (
+        <Stack direction="row" spacing={1}>
+          <Chip
+            label={labelFromPriority}
+            color={colorFromPriority}
+            variant="outlined"
+          />
+        </Stack>
+      );
+    },
+    minWidth: 150,
+  },
+  {
+    field: "createdAt",
+    headerName: "Data de Criação",
+    minWidth: 150,
+    renderCell(params) {
+      const date = params.row.createdAt;
+      return new Date(date).toLocaleDateString("pt-BR");
+    },
+  },
+  {
+    field: "DueDate",
+    headerName: "Data de Conclusão",
+
+    minWidth: 150,
+    renderCell(params) {
+      const date = params.row.dueDate;
+      return new Date(date).toLocaleDateString("pt-BR");
+    },
+  },
+  {
+    field: "actions",
+    headerName: "Ações das Tarefas",
+    renderCell(params) {
+      return (
+        <Grid item xs={4}>
+          <IconButton color="primary">
+            <EditIcon />
+          </IconButton>
+          <IconButton color="primary">
+            <VisibilityIcon />
+          </IconButton>
+        </Grid>
+      );
+    },
+    minWidth: 150,
+  },
+];
 
 export const Main = () => {
-  const theme = useTheme();
-
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [selectedRows, setSelectedRows] = useState<number[]>([]);
 
   useEffect(() => {
     const handleFetch = async () => {
-      const tasks = await axios.get("localhost:3000/tasks");
-      console.log(tasks);
-      setTasks(tasks.data);
+      const {
+        data: { data },
+      } = await axios.get("http://localhost:3000/task");
+
+      const tasks: ITask[] = data;
+      setTasks(tasks);
+      setSelectedRows(
+        tasks.filter(({ completed }) => completed).map(({ id }) => id)
+      );
     };
     handleFetch();
   }, []);
   return (
     <Grid
       style={{
-        backgroundColor: theme.palette.grey[200],
         padding: 30,
       }}
-      xs={12}
+      container
     >
-      <Grid xs={12}>
+      <Grid>
         <Typography component="h4" variant="h5">
           Listagem de Tarefas
         </Typography>
@@ -43,34 +115,37 @@ export const Main = () => {
         </Typography>
       </Grid>
 
-      <Grid padding={3} container gap={4}>
-        {tasks.map((data: any) => (
-          <Card style={{ width: "100%" }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Word of the Day
-              </Typography>
-              <Typography variant="h5" component="div">
-               { data.title}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              { data.description }
-              </Typography>
-              <Typography variant="body2">
-                well meaning and kindly.
-                <br />
-                {'"a benevolent smile"'}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Learn More</Button>
-            </CardActions>
-          </Card>
-        ))}
+      <Grid container marginTop={2}>
+        <Box
+          sx={{
+            minHeight: "100%",
+            maxHeight: "100%",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          <DataGrid
+            rows={tasks}
+            columns={columns}
+            localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
+            rowSelectionModel={selectedRows}
+            onRowSelectionModelChange={(ids) => {
+              const selectedIDs = ids as number[];
+
+              setSelectedRows(selectedIDs);
+            }}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 20,
+                },
+              },
+            }}
+            pageSizeOptions={[20]}
+            checkboxSelection
+            disableRowSelectionOnClick
+          />
+        </Box>
       </Grid>
     </Grid>
   );
