@@ -1,13 +1,11 @@
 import axios from "./api";
 import { ITask } from "../interfaces/task.interface";
 
+const baseURL = "task"
 export class TaskService {
-   readonly base = "task";
-
+  
   async create(task: ITask) {
-    const {
-      data,
-    } = await axios.post(this.base, task);
+    const { data } = await axios.post(baseURL, task);
 
     return data;
   }
@@ -15,7 +13,7 @@ export class TaskService {
   async findAll(): Promise<ITask[]> {
     const {
       data: { data },
-    } = await axios.get(this.base);
+    } = await axios.get(baseURL);
 
     return data;
   }
@@ -23,15 +21,15 @@ export class TaskService {
   async findOne(id: number) {
     const {
       data: { data },
-    } = await axios.get(`${this.base}/${id}`);
+    } = await axios.get(`${baseURL}/${id}`);
 
     return data;
   }
 
-  async update(id: number, task: ITask) {
+  async update(task: ITask) {
     const {
       data: { data },
-    } = await axios.put(`${this.base}/${id}`, task);
+    } = await axios.put(`${baseURL}/${task.id}`, task);
 
     return data;
   }
@@ -39,15 +37,15 @@ export class TaskService {
   async remove(id: number) {
     const {
       data: { data },
-    } = await axios.delete(`${this.base}/${id}`);
+    } = await axios.delete(`${baseURL}/${id}`);
 
     return data;
   }
 
-  async completeMultipleTask(ids: number[] ):  Promise<ITask[]> {
+  async completeMultipleTask(ids: number[]): Promise<ITask[]> {
     const {
       data: { data },
-    } = await axios.patch(`${this.base}/complete`, {
+    } = await axios.patch(`${baseURL}/complete`, {
       taskIds: ids,
     });
 
