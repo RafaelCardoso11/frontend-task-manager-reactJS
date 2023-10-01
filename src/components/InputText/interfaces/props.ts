@@ -1,11 +1,11 @@
 import { Control } from "react-hook-form";
-import { KeysOf } from "../../../helpers/keysOf";
-import { ITask } from "../../../interfaces/task.interface";
+import { ITask, ITaskKeyOf } from "../../../interfaces/task.interface";
 
 export interface props {
   label: string;
-  name: KeysOf<ITask>;
+  name: ITaskKeyOf;
   control: Control<ITask>;
   minRows?: number;
   multiline?: boolean;
+  disabled?: boolean;
 }
