@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
-import { Task } from "../../pages/Task";
+import { MainProps } from "../interfaces/main-props.interface";
 
-export const Main = () => {
+export const Main: React.FC<MainProps> = ({ title, subtitle, element }) => {
   return (
     <Grid
       style={{
@@ -11,17 +11,16 @@ export const Main = () => {
     >
       <Grid item xs={12}>
         <Typography component="h4" variant="h5">
-          Listagem de Tarefas
+          {title}
         </Typography>
 
         <Typography component="p" variant="body1">
-          A página de lista de tarefas permite que a visualização, marque como
-          concluídas e adicione novas tarefas
+          {subtitle}
         </Typography>
       </Grid>
 
       <Grid item marginTop={2} xs={12}>
-        <Task />
+        {element}
       </Grid>
     </Grid>
   );

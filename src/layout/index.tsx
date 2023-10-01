@@ -3,11 +3,16 @@ import { Header } from "./header";
 import { Sidebar } from "./sidebar";
 import { Main } from "./main";
 import { Footer } from "./footer";
+import React from "react";
+import { LayoutProps } from "./interfaces/layout-props.interface";
 
-export const Layout = () => {
+
+
+
+export const Layout: React.FC<LayoutProps> = ({ main }) => {
   return (
     <Grid container>
-      <Grid item xs={12} >
+      <Grid item xs={12}>
         <Header />
         <Divider />
       </Grid>
@@ -20,7 +25,7 @@ export const Layout = () => {
           <Sidebar />
         </Grid>
         <Grid xs={10} item height="100%">
-          <Main />
+          <Main {...main} />
         </Grid>
       </Grid>
       <Grid container justifyContent="center" alignItems="center">
