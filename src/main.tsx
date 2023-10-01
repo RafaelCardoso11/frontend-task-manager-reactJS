@@ -5,6 +5,7 @@ import './index.css'
 import { ThemeProvider } from 'styled-components'
 import theme from './themes/default.ts'
 import { CssBaseline } from '@mui/material'
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
