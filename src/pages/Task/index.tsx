@@ -9,28 +9,76 @@ import { priorityItems } from "./priorityItems";
 import dayjs from "dayjs";
 import { useMutation } from "react-query";
 import { TaskService } from "../../services/Task";
+import { ReactNode, useEffect } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-const { create } = new TaskService();
-export const Task = () => {
-  const { handleSubmit, control } = useForm<ITask>({
+const taskService = new TaskService();
+
+interface props {
+  children?: ReactNode;
+}
+
+export const Task: React.FC<props> = () => {
+  const { id: idTask } = useParams();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const isView = pathname.includes("visualizar");
+
+  const { handleSubmit, control, setValue } = useForm<ITask>({
     defaultValues: {
       priority: PriorityEnum.LOW,
+      dueDate: new Date().toISOString()
     },
   });
 
-  const task = useMutation(create, {
+  const createTask = useMutation(taskService.create, {
+    onSuccess(data) {
+      console.log(data, "SUCESS");
+    },
+  });
+  const updateTask = useMutation(taskService.update, {
     onSuccess(data) {
       console.log(data, "SUCESS");
     },
   });
 
-  const onSubmit: SubmitHandler<ITask> = (data) => task.mutate(data);
+  const { mutate: findOneTask } = useMutation(taskService.findOne, {
+    onSuccess(task: ITask) {
+      setValue("title", task.title);
+      setValue("description", task.description);
+      setValue("dueDate", task.dueDate);
+      setValue("priority", task.priority);
+    },
+    onError() {
+      navigate("/");
+    },
+  });
+
+  useEffect(() => {
+    if (idTask) {
+      findOneTask(Number(idTask));
+    }
+  }, [findOneTask, idTask]);
+
+  const onSubmit: SubmitHandler<ITask> = (data) => {
+    if (idTask) {
+      updateTask.mutate({ ...data, id: Number(idTask) });
+    } else {
+      createTask.mutate(data);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <InputText control={control} name="title" label="Titulo" />
+          <InputText
+            control={control}
+            name="title"
+            label="Titulo"
+            disabled={isView}
+          />
         </Grid>
         <Grid item xs={12}>
           <InputText
@@ -39,6 +87,7 @@ export const Task = () => {
             label="Descrição da Tarefa"
             multiline
             minRows={4}
+            disabled={isView}
           />
         </Grid>
 
@@ -48,6 +97,7 @@ export const Task = () => {
             name="priority"
             label="Prioridade"
             items={priorityItems}
+            disabled={isView}
           />
         </Grid>
         <Grid item xs={6}>
@@ -56,30 +106,42 @@ export const Task = () => {
             name="dueDate"
             minDate={dayjs()}
             label="Data de Conclusão"
+            disabled={isView}
           />
         </Grid>
 
-        <Grid
-          container
-          xs={12}
-          margin={2}
-          justifyContent="flex-end"
-          spacing={1}
-        >
+        <Grid container margin={2} justifyContent="flex-end" spacing={1}>
           <Grid item>
-            <Button variant="contained" size="large" color="warning">
+            <Button
+              variant="contained"
+              size="large"
+              color="warning"
+              onClick={() => navigate(-1)}
+            >
               Voltar
             </Button>
           </Grid>
           <Grid item>
-            <Button
-              variant="contained"
-              type="submit"
-              size="large"
-              color="primary"
-            >
-              Cadastrar Tarefa
-            </Button>
+            {!isView &&
+              (idTask ? (
+                <Button
+                  variant="contained"
+                  type="submit"
+                  size="large"
+                  color="primary"
+                >
+                  Editar Tarefa
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  type="submit"
+                  size="large"
+                  color="primary"
+                >
+                  Cadastrar Tarefa
+                </Button>
+              ))}
           </Grid>
         </Grid>
       </Grid>
