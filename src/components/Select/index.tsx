@@ -7,7 +7,7 @@ import {
 import { props } from "./interfaces/props";
 import { Controller } from "react-hook-form";
 
-export const Select = ({ control, name, label, items }: props) => {
+export const Select = ({ control, name, label, items, disabled = false }: props) => {
   return (
     <Controller
       name={name}
@@ -16,13 +16,14 @@ export const Select = ({ control, name, label, items }: props) => {
         <FormControl fullWidth>
           <InputLabel>{label}</InputLabel>
           <MuiSelect
+            {...field}
             variant="outlined"
             label="Prioridade"
             color="primary"
-            {...field}
+            disabled={disabled}
           >
             {items.map(({ value, label }) => (
-              <MenuItem value={value}>{label}</MenuItem>
+              <MenuItem  key={value+label} value={value}>{label}</MenuItem>
             ))}
           </MuiSelect>
         </FormControl>

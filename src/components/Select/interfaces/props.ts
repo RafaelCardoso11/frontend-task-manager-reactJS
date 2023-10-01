@@ -1,6 +1,5 @@
 import { Control } from "react-hook-form";
-import { ITask } from "../../../interfaces/task.interface";
-import { KeysOf } from "../../../helpers/keysOf";
+import { ITask, ITaskKeyOf } from "../../../interfaces/task.interface";
 
 
 
@@ -11,7 +10,8 @@ interface Item {
 
 export interface props {
     label: string;
-    name: KeysOf<ITask>;
+    name: ITaskKeyOf;
     items: Item[],
     control: Control<ITask>;
+    disabled?: boolean;
 }
