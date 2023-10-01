@@ -16,11 +16,12 @@ export const Layout: React.FC<LayoutProps> = ({ main }) => {
         <Header />
         <Divider />
       </Grid>
-      <Grid container minHeight="100vh">
+      <Grid container >
         <Grid
           item
           xs={2}
           style={{ boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.2)" }}
+          height={"90vh"}
         >
           <Sidebar />
         </Grid>
