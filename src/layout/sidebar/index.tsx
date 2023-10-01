@@ -8,16 +8,19 @@ import {
 } from "@mui/material";
 
 import { Task } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 export const Sidebar = () => {
   return (
     <Grid item>
       <List component="nav">
-        <ListItemButton>
-          <ListItemIcon>
-            <Task />
-          </ListItemIcon>
-          <ListItemText primary="Tarefas" />
-        </ListItemButton>
+        <Link to="/" >
+          <ListItemButton>
+            <ListItemIcon>
+              <Task />
+            </ListItemIcon>
+            <ListItemText primary="Tarefas" />
+          </ListItemButton>
+        </Link>
       </List>
       <Divider />
     </Grid>
