@@ -1,12 +1,23 @@
-import { GridColDef } from "@mui/x-data-grid";
+import { GridColDef, GridDeleteIcon } from "@mui/x-data-grid";
 import { PriorityEnum } from "../../enums/priority.enum";
 import { Chip, Grid, IconButton, Stack } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { formatterDate } from "../../helpers/formatterDate";
+import { Link } from "react-router-dom";
+import { TaskService } from "../../services/Task";
 
+const taskService = new TaskService();
 export const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 150 },
+  {
+    field: "completed",
+    headerName: "Status",
+    width: 150,
+    renderCell({ row: { completed } }) {
+      return completed ? "Feita" : "Não feita";
+    },
+  },
   { field: "title", headerName: "Titulo", width: 150 },
   { field: "description", headerName: "Descrição", width: 300 },
   {
@@ -60,15 +71,25 @@ export const columns: GridColDef[] = [
   {
     field: "actions",
     headerName: "Ações das Tarefas",
-    renderCell(params) {
-      console.log(params.row);
+    renderCell({ id }) {
       return (
         <Grid item xs={4}>
-          <IconButton color="primary">
-            <EditIcon />
-          </IconButton>
-          <IconButton color="primary">
-            <VisibilityIcon />
+          <Link to={`editar/${id}`}>
+            <IconButton color="primary">
+              <EditIcon />
+            </IconButton>
+          </Link>
+          <Link to={`visualizar/${id}`}>
+            <IconButton color="primary">
+              <VisibilityIcon />
+            </IconButton>
+          </Link>
+
+          <IconButton
+            color="error"
+            onClick={() => taskService.remove(Number(id))}
+          >
+            <GridDeleteIcon />
           </IconButton>
         </Grid>
       );

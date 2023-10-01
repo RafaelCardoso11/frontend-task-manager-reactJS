@@ -1,19 +1,24 @@
-import { Box } from "@mui/material";
-import { useState } from "react";
+import { Box, Button, Grid } from "@mui/material";
+import { ReactNode, useState } from "react";
 
-import { DataGrid, ptBR } from "@mui/x-data-grid";
+import { DataGrid, GridRowSelectionModel, ptBR } from "@mui/x-data-grid";
 
 import { ITask } from "../../interfaces/task.interface";
 import { columns } from "./columns";
 import { useQuery } from "react-query";
 import { TaskService } from "../../services/Task";
+import { useNavigate } from "react-router-dom";
 
-const { completeMultipleTask, findAll } = new TaskService();
-
-export const List = () => {
+const taskService = new TaskService();
+interface props {
+  children?: ReactNode;
+}
+export const ListTask: React.FC<props> = () => {
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
 
-  const { data: tasks } = useQuery<ITask[]>("task", findAll, {
+  const navigate = useNavigate();
+
+  const { data: tasks } = useQuery<ITask[]>("task", taskService.findAll, {
     onSuccess(tasks) {
       setSelectedRows(
         tasks.filter(({ completed }) => completed).map(({ id }) => id)
@@ -21,39 +26,48 @@ export const List = () => {
     },
   });
 
-  const handleSelectedRows = async (ids: number[]) =>
-    await completeMultipleTask(ids);
+  const handleCheckTasks = async (ids: number[]) =>
+    await taskService.completeMultipleTask(ids);
+
+  const handleOnRowSelection = async (ids: GridRowSelectionModel) => {
+    const selectedIDs = ids as number[];
+    setSelectedRows(selectedIDs);
+    handleCheckTasks(selectedIDs);
+  };
 
   return (
-    <Box
-      sx={{
-        minHeight: "100%",
-        maxHeight: "100%",
-        height: "100%",
-        width: "100%",
-      }}
-    >
-      <DataGrid
-        rows={tasks || []}
-        columns={columns}
-        localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
-        rowSelectionModel={selectedRows}
-        onRowSelectionModelChange={(ids) => {
-          const selectedIDs = ids as number[];
-          setSelectedRows(selectedIDs);
-          handleSelectedRows(selectedIDs);
-        }}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 20,
+    <Grid item>
+      <Box height="65vh">
+        <DataGrid
+          rows={tasks || []}
+          columns={columns}
+          localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
+          rowSelectionModel={selectedRows}
+          onRowSelectionModelChange={handleOnRowSelection}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[20]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </Box>
+          }}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+      </Box>
+
+      <Grid container spacing={2} marginTop={2}>
+        <Grid item>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            onClick={() => navigate("/criar")}
+          >
+            Cadastrar tarefa
+          </Button>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
