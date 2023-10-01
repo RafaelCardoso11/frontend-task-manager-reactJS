@@ -8,4 +8,5 @@ export interface props {
   control: Control<ITask>;
   name: KeysOf<ITask>;
   minDate: Dayjs;
+  disabled?: boolean;
 }

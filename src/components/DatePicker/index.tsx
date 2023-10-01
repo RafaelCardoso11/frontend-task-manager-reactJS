@@ -4,8 +4,16 @@ import { DatePicker as MuiDatePicker } from "@mui/x-date-pickers/DatePicker";
 import { props } from "./interfaces/props";
 import { ptBR } from "@mui/x-date-pickers";
 import { Controller } from "react-hook-form";
+import { FormControl, FormHelperText } from "@mui/material";
+import dayjs from "dayjs";
 
-export const DatePicker = ({ control, name, label, minDate }: props) => {
+export const DatePicker = ({
+  control,
+  name,
+  label,
+  minDate,
+  disabled,
+}: props) => {
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
@@ -16,15 +24,28 @@ export const DatePicker = ({ control, name, label, minDate }: props) => {
       <Controller
         name={name}
         control={control}
-        render={({ field }) => (
-          <MuiDatePicker
-            label={label}
-            format="DD/MM/YYYY"
-            minDate={minDate}
-            {...field}
-            slotProps={{ textField: { fullWidth: true } }}
-          />
-        )}
+        render={({ field, fieldState }) => {
+          const value = dayjs(field.value as string);
+
+          return (
+            <FormControl fullWidth>
+              <MuiDatePicker
+                {...field}
+                value={value}
+                disabled={disabled}
+                label={label}
+                format="DD/MM/YYYY"
+                minDate={minDate}
+                slotProps={{ textField: { fullWidth: true } }}
+              />
+              {fieldState.error ? (
+                <FormHelperText error>
+                  {fieldState.error?.message}
+                </FormHelperText>
+              ) : null}
+            </FormControl>
+          );
+        }}
       />
     </LocalizationProvider>
   );
