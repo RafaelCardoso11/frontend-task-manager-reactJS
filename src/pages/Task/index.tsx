@@ -1,5 +1,5 @@
 import { Button, Grid } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { ITask } from "../../interfaces/task.interface";
 import { DatePicker } from "../../components/DatePicker";
 import { PriorityEnum } from "../../enums/priority.enum";
@@ -11,6 +11,8 @@ import { useMutation } from "react-query";
 import { TaskService } from "../../services/Task";
 import { ReactNode, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { validationSchema } from "./validations";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const taskService = new TaskService();
 
@@ -23,24 +25,17 @@ export const Task: React.FC<props> = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  const createTask = useMutation(taskService.create);
+  const updateTask = useMutation(taskService.update);
+
   const isView = pathname.includes("visualizar");
 
   const { handleSubmit, control, setValue } = useForm<ITask>({
     defaultValues: {
       priority: PriorityEnum.LOW,
-      dueDate: new Date().toISOString()
+      dueDate: new Date().toISOString(),
     },
-  });
-
-  const createTask = useMutation(taskService.create, {
-    onSuccess(data) {
-      console.log(data, "SUCESS");
-    },
-  });
-  const updateTask = useMutation(taskService.update, {
-    onSuccess(data) {
-      console.log(data, "SUCESS");
-    },
+    resolver: yupResolver(validationSchema) as Resolver<ITask>,
   });
 
   const { mutate: findOneTask } = useMutation(taskService.findOne, {
@@ -61,11 +56,15 @@ export const Task: React.FC<props> = () => {
     }
   }, [findOneTask, idTask]);
 
-  const onSubmit: SubmitHandler<ITask> = (data) => {
+  const onSubmit: SubmitHandler<ITask> = async (data) => {
     if (idTask) {
       updateTask.mutate({ ...data, id: Number(idTask) });
     } else {
-      createTask.mutate(data);
+     const response = await createTask.mutateAsync(data);
+
+      if (response) {
+        navigate("/");
+      }
     }
   };
 
