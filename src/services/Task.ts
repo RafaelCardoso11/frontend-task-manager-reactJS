@@ -36,7 +36,7 @@ export class TaskService {
 
   async remove(id: number) {
     const {
-      data: { data },
+      data
     } = await axios.delete(`${baseURL}/${id}`);
 
     return data;
