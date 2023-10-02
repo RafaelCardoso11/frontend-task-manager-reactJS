@@ -35,7 +35,7 @@ export const ListTask: React.FC<props> = () => {
     {
       onSuccess(tasks) {
         setSelectedRows(
-          tasks.filter(({ completed }) => completed).map(({ id }) => id)
+          tasks.filter(({ completed }) => completed).map(({ id }) => Number(id))
         );
       },
     }
@@ -105,12 +105,12 @@ export const ListTask: React.FC<props> = () => {
             sorting: {
               sortModel: [
                 {
-                  field: 'completed',
-                  sort: 'asc',
+                  field: "completed",
+                  sort: "asc",
                 },
                 {
-                  field: 'id',
-                  sort: 'asc',
+                  field: "id",
+                  sort: "asc",
                 },
               ],
             },
@@ -126,6 +126,16 @@ export const ListTask: React.FC<props> = () => {
       </Box>
 
       <Grid container spacing={2} marginTop={2}>
+        <Grid item>
+          <Button
+            variant="contained"
+            size="large"
+            color="warning"
+            onClick={() => refetch()}
+          >
+            Atualizar dados
+          </Button>
+        </Grid>
         <Grid item>
           <Button
             variant="contained"
