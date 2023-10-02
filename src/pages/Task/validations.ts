@@ -13,6 +13,7 @@ export const validationSchema = yup.object().shape({
     .optional()
     .nullable(),
   priority: yup.string().required("A Prioridade é obrigatória"),
+  completed: yup.boolean(),
   dueDate: yup
     .string()
     .transform((dueDate) => new Date(dueDate).toISOString())
