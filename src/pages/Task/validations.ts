@@ -2,9 +2,16 @@ import * as yup from "yup";
 import { minDateISO } from "../../helpers/minDateISO.helper";
 
 export const validationSchema = yup.object().shape({
-  id: yup.string(),
-  title: yup.string().required("O Título da Tarefa é obrigatório."),
-  description: yup.string().optional().nullable(),
+  id: yup.number(),
+  title: yup
+    .string()
+    .max(127, "O máximo de caractéres permitidos nesse campo são 127")
+    .required("O Título da Tarefa é obrigatório."),
+  description: yup
+    .string()
+    .max(300, "O máximo de caractéres permitidos nesse campo são 300")
+    .optional()
+    .nullable(),
   priority: yup.string().required("A Prioridade é obrigatória"),
   dueDate: yup
     .string()
