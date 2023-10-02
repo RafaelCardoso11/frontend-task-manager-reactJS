@@ -1,9 +1,9 @@
 import axios from "./api";
 import { ITask } from "../interfaces/task.interface";
+import { ITaskCompletion } from "../interfaces/taskCompletation.interface";
 
-const baseURL = "task"
+const baseURL = "task";
 export class TaskService {
-  
   async create(task: ITask) {
     const { data } = await axios.post(baseURL, task);
 
@@ -35,18 +35,16 @@ export class TaskService {
   }
 
   async remove(id: number) {
-    const {
-      data
-    } = await axios.delete(`${baseURL}/${id}`);
+    const { data } = await axios.delete(`${baseURL}/${id}`);
 
     return data;
   }
 
-  async completeMultipleTask(ids: number[]): Promise<ITask[]> {
+  async updateCompleteMultipleTask(tasks: ITaskCompletion[]): Promise<ITask[]> {
     const {
       data: { data },
     } = await axios.patch(`${baseURL}/complete`, {
-      taskIds: ids,
+      taskCompletions: tasks,
     });
 
     return data;

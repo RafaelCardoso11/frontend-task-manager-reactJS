@@ -16,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ModalConfirm } from "../../components/ModalConfirm";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
+import { ITaskCompletion } from "../../interfaces/taskCompletation.interface";
 
 const taskService = new TaskService();
 interface props {
@@ -41,13 +42,25 @@ export const ListTask: React.FC<props> = () => {
     }
   );
 
-  const handleCheckTasks = async (ids: number[]) =>
-    await taskService.completeMultipleTask(ids);
+  const handleCheckTasks = async (tasksCompletion: ITaskCompletion[]) =>
+    await taskService.updateCompleteMultipleTask(tasksCompletion);
 
   const handleOnRowSelection = async (ids: GridRowSelectionModel) => {
     const selectedIDs = ids as number[];
     setSelectedRows(selectedIDs);
-    handleCheckTasks(selectedIDs);
+
+    if (tasks) {
+      const tasksCompletion = tasks.map<ITaskCompletion>(({ id }) => {
+        const selectedId = selectedIDs.find(
+          (selectedId) => selectedId === Number(id)
+        );
+        return {
+          taskId: Number(id),
+          completed: !!selectedId,
+        };
+      });
+      handleCheckTasks(tasksCompletion);
+    }
   };
 
   const handleConfirmDeleteTask = async () => {
