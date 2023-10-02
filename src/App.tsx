@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         main={{
           title: "Listagem de Tarefas",
           subtitle:
-            "A página de lista de tarefas permite que a visualização, marque como concluídas e adicione novas tarefas",
+            "A página de listagem de tarefas exibe todas as tarefas disponíveis. Você pode marcar uma tarefa como concluída, visualizar os detalhes da tarefa, editá-la, excluí-la e adicionar novas tarefas.",
           element: <ListTask />,
         }}
       />
@@ -34,7 +34,8 @@ const router = createBrowserRouter([
       <Layout
         main={{
           title: "Cadastro de Tarefas",
-          subtitle: "lorem ipsum dolor sit amet, consectetur adip",
+          subtitle:
+            "Para adicionar uma nova tarefa, você pode usar um formulário para inserir os detalhes da tarefa, como título, descrição e data de vencimento. Após preencher os campos, clique no botão 'Cadastrar Tarefa' para criar a nova tarefa.",
           element: <Task />,
         }}
       />
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       <Layout
         main={{
           title: "Visualização da Tarefa",
-          subtitle: "lorem ipsum dolor sit amet, consectetur adip",
+          subtitle: "Você pode ver os detalhes de uma tarefa específica.",
           element: <Task />,
         }}
       />
@@ -58,7 +59,8 @@ const router = createBrowserRouter([
       <Layout
         main={{
           title: "Editar Tarefa",
-          subtitle: "lorem ipsum dolor sit amet, consectetur adip",
+          subtitle:
+            "Para editar uma tarefa existente, clique no botão 'Editar Tarefa'. Isso permitirá que você faça alterações nos detalhes da tarefa, como título, descrição e data de vencimento.",
           element: <Task />,
         }}
       />
