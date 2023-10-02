@@ -1,13 +1,8 @@
-import { GridColDef, GridDeleteIcon } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { PriorityEnum } from "../../enums/priority.enum";
-import { Chip, Grid, IconButton, Stack } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Chip, Stack } from "@mui/material";
 import { formatterDate } from "../../helpers/formatterDate";
-import { Link } from "react-router-dom";
-import { TaskService } from "../../services/Task";
 
-const taskService = new TaskService();
 export const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 150 },
   {
@@ -67,33 +62,5 @@ export const columns: GridColDef[] = [
       const date = params.row.dueDate;
       return formatterDate(date);
     },
-  },
-  {
-    field: "actions",
-    headerName: "Ações das Tarefas",
-    renderCell({ id }) {
-      return (
-        <Grid item xs={4}>
-          <Link to={`editar/${id}`}>
-            <IconButton color="primary">
-              <EditIcon />
-            </IconButton>
-          </Link>
-          <Link to={`visualizar/${id}`}>
-            <IconButton color="primary">
-              <VisibilityIcon />
-            </IconButton>
-          </Link>
-
-          <IconButton
-            color="error"
-            onClick={() => taskService.remove(Number(id))}
-          >
-            <GridDeleteIcon />
-          </IconButton>
-        </Grid>
-      );
-    },
-    minWidth: 150,
   },
 ];
