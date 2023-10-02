@@ -1,19 +1,12 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { PriorityEnum } from "../../enums/priority.enum";
 import { Chip, Stack } from "@mui/material";
-import { formatterDate } from "../../helpers/formatterDate";
+import { formatterDate } from "../../helpers/formatterDate.helper";
 
 export const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 150 },
-  {
-    field: "completed",
-    headerName: "Status",
-    width: 150,
-    renderCell({ row: { completed } }) {
-      return completed ? "Feita" : "Não feita";
-    },
-  },
-  { field: "title", headerName: "Titulo", width: 150 },
+  { field: "id", headerName: "ID", width: 50 },
+
+  { field: "title", headerName: "Titulo", width: 250 },
   { field: "description", headerName: "Descrição", width: 300 },
   {
     field: "priority",
@@ -43,6 +36,14 @@ export const columns: GridColDef[] = [
       );
     },
     minWidth: 150,
+  },
+  {
+    field: "completed",
+    width: 150,
+    headerName: "Status",
+    renderCell({ row: { completed } }) {
+      return completed ? "Concluída" : "Não Concluída";
+    },
   },
   {
     field: "createdAt",
