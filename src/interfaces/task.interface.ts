@@ -1,12 +1,12 @@
 import { KeysOf } from "../helpers/keysOf.helper";
 
 export interface ITask {
-  id?: number;
+  id: number;
   title: string;
   description?: string;
   priority: string;
   dueDate: string;
-  completed?: boolean;
+  completed: boolean;
   createdAt?: string;
 }
 
