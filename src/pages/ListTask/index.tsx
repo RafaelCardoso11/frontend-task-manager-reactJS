@@ -1,5 +1,5 @@
 import { Box, Button, Grid, IconButton } from "@mui/material";
-import {  useState } from "react";
+import { useState } from "react";
 
 import {
   DataGrid,
@@ -28,7 +28,7 @@ export const ListTask: React.FC<IProps> = () => {
 
   const navigate = useNavigate();
 
-  const { data: tasks, refetch } = useQuery<ITask[]>(
+  const { data: tasks, refetch, isLoading } = useQuery<ITask[]>(
     "task",
     taskService.findAll,
     {
@@ -81,6 +81,7 @@ export const ListTask: React.FC<IProps> = () => {
     <Grid item>
       <Box height="65vh">
         <DataGrid
+          loading={isLoading}
           rows={tasks || []}
           columns={[
             ...columns,
@@ -117,25 +118,21 @@ export const ListTask: React.FC<IProps> = () => {
           localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
           rowSelectionModel={selectedRows}
           onRowSelectionModelChange={handleOnRowSelection}
-          initialState={{
-            sorting: {
-              sortModel: [
-                {
-                  field: "completed",
-                  sort: "asc",
-                },
-                {
-                  field: "id",
-                  sort: "asc",
-                },
-              ],
+          sortModel={[
+            {
+              field: "createdAt",
+              sort: "desc",
             },
+          ]}
+          initialState={{
             pagination: {
               paginationModel: {
+                page: 0,
                 pageSize: 10,
-              },
-            },
+              }
+            }
           }}
+          pageSizeOptions={[10, 25]}
           checkboxSelection
           disableRowSelectionOnClick
         />
