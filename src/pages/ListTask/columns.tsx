@@ -4,7 +4,7 @@ import { Chip, Stack } from "@mui/material";
 import { formatterDate } from "@/helpers/formatterDate.helper";
 
 export const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 50 },
+  { field: "id", headerName: "ID", width: 70 },
 
   { field: "title", headerName: "Titulo", width: 250 },
   { field: "description", headerName: "Descrição", width: 300 },
