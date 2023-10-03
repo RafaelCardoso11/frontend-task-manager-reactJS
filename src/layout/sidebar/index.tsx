@@ -13,7 +13,7 @@ export const Sidebar = () => {
   return (
     <Grid item>
       <List component="nav">
-        <Link to="/" >
+        <Link to="/">
           <ListItemButton>
             <ListItemIcon>
               <Task />

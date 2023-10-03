@@ -1,7 +1,7 @@
 import {
   Avatar,
   Badge,
-  Box,
+  Grid,
   IconButton,
   Toolbar,
   Typography,
@@ -16,29 +16,32 @@ export const Header = () => {
     <Toolbar
       style={{
         backgroundColor: theme.palette.primary.main,
-        justifyContent: "space-between",
       }}
     >
-      <IconButton edge="start" style={{ color: "white", gap: 10 }}>
-        <MenuIcon />
-        <Typography component="h1" variant="h6" color="white">
-          Gerenciamento de Tarefas
-        </Typography>
-      </IconButton>
+      <Grid container alignItems="center" justifyContent="space-between ">
+        <Grid item xs={8}>
+          <IconButton edge="start" style={{ color: "white", gap: 10 }}>
+            <MenuIcon />
+            <Typography component="h1" variant="h6" color="white">
+              Gerenciamento de Tarefas
+            </Typography>
+          </IconButton>
+        </Grid>
 
-      <Box>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} style={{ color: "white", marginRight: 10 }}>
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <IconButton color="inherit">
-          <Avatar
-            alt="User Avatar"
-            src="https://media.licdn.com/dms/image/D4D03AQG534wNPHhang/profile-displayphoto-shrink_800_800/0/1682369927317?e=1701302400&v=beta&t=amZkkrDQVCGWy7HvQEmMCoewa1EZOPcaYmoNF_e_I_Q"
-          />
-        </IconButton>
-      </Box>
+        <Grid item >
+          <IconButton color="inherit">
+            <Badge badgeContent={4} style={{ color: "white", marginRight: 10 }}>
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <IconButton color="inherit">
+            <Avatar
+              alt="User Avatar"
+              src="https://media.licdn.com/dms/image/D4D03AQG534wNPHhang/profile-displayphoto-shrink_800_800/0/1682369927317?e=1701302400&v=beta&t=amZkkrDQVCGWy7HvQEmMCoewa1EZOPcaYmoNF_e_I_Q"
+            />
+          </IconButton>
+        </Grid>
+      </Grid>
     </Toolbar>
   );
 };

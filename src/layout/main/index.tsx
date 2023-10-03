@@ -19,7 +19,7 @@ export const Main: React.FC<MainProps> = ({ title, subtitle, element }) => {
         </Typography>
       </Grid>
 
-      <Grid item marginTop={2} xs={12}>
+      <Grid item marginTop={4} xs={12}>
         {element}
       </Grid>
     </Grid>

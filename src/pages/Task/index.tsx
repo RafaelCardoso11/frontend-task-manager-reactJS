@@ -68,8 +68,8 @@ export const Task: React.FC<IProps> = () => {
     <div>
       {!isLoading ? (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={12} lg={12}>
               <InputText
                 control={control}
                 name="title"
@@ -77,7 +77,7 @@ export const Task: React.FC<IProps> = () => {
                 disabled={isView}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={12} lg={12}>
               <InputText
                 control={control}
                 name="description"
@@ -88,7 +88,7 @@ export const Task: React.FC<IProps> = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} lg={6}>
               <Select
                 control={control}
                 name="priority"
@@ -97,7 +97,7 @@ export const Task: React.FC<IProps> = () => {
                 disabled={isView}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} lg={6}>
               <DatePicker
                 control={control}
                 name="dueDate"
@@ -143,7 +143,7 @@ export const Task: React.FC<IProps> = () => {
             </Grid>
           </Grid>
         </form>
-      ) : ( 
+      ) : (
         <CircularProgress />
       )}
     </div>

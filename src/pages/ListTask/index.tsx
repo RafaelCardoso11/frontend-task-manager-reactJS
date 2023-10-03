@@ -28,18 +28,18 @@ export const ListTask: React.FC<IProps> = () => {
 
   const navigate = useNavigate();
 
-  const { data: tasks, refetch, isLoading } = useQuery<ITask[]>(
-    "task",
-    taskService.findAll,
-    {
-      onSuccess(tasks) {
-        const completedTaskIds = tasks
-          .filter(({ completed }) => completed)
-          .map(({ id }) => Number(id));
-        setSelectedRows(completedTaskIds);
-      },
-    }
-  );
+  const {
+    data: tasks,
+    refetch,
+    isLoading,
+  } = useQuery<ITask[]>("task", taskService.findAll, {
+    onSuccess(tasks) {
+      const completedTaskIds = tasks
+        .filter(({ completed }) => completed)
+        .map(({ id }) => Number(id));
+      setSelectedRows(completedTaskIds);
+    },
+  });
 
   const handleCheckTasks = async (tasksCompletion: ITaskCompletion[]) =>
     await taskService.updateCompleteMultipleTask(tasksCompletion);
@@ -129,8 +129,8 @@ export const ListTask: React.FC<IProps> = () => {
               paginationModel: {
                 page: 0,
                 pageSize: 10,
-              }
-            }
+              },
+            },
           }}
           pageSizeOptions={[10, 25]}
           checkboxSelection
@@ -139,20 +139,22 @@ export const ListTask: React.FC<IProps> = () => {
       </Box>
 
       <Grid container spacing={2} marginTop={2}>
-        <Grid item>
+        <Grid item xs={12} sm="auto">
           <Button
             variant="contained"
             size="large"
             color="warning"
+            fullWidth
             onClick={() => refetch()}
           >
             Atualizar dados
           </Button>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}  sm="auto">
           <Button
             variant="contained"
             size="large"
+            fullWidth
             color="primary"
             onClick={() => navigate("/criar")}
           >
