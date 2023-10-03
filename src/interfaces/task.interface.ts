@@ -1,4 +1,4 @@
-import { KeysOf } from "../helpers/keysOf.helper";
+import { KeysOf } from "@/helpers/keysOf.helper";
 
 export interface ITask {
   id: number;

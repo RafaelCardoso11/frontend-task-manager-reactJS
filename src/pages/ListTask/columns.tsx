@@ -1,7 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
-import { PriorityEnum } from "../../enums/priority.enum";
+import { PriorityEnum } from "@/enums/priority.enum";
 import { Chip, Stack } from "@mui/material";
-import { formatterDate } from "../../helpers/formatterDate.helper";
+import { formatterDate } from "@/helpers/formatterDate.helper";
 
 export const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 50 },

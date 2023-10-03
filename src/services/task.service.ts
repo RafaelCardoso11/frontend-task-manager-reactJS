@@ -1,6 +1,6 @@
 import axios from "./api";
-import { ITask } from "../interfaces/task.interface";
-import { ITaskCompletion } from "../interfaces/taskCompletation.interface";
+import { ITask } from "@/interfaces/task.interface";
+import { ITaskCompletion } from "@/interfaces/taskCompletation.interface";
 
 const baseURL = "task";
 export class TaskService {

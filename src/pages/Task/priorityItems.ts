@@ -1,4 +1,4 @@
-import { PriorityEnum } from "../../enums/priority.enum";
+import { PriorityEnum } from "@/enums/priority.enum";
 
 interface Priority {
   value: string;

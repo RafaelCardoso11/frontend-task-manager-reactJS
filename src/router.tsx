@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import { Layout } from "./layout";
-import { ListTask } from "./pages/ListTask";
-import { Task } from "./pages/Task";
+import { Layout } from "@/layout";
+import { ListTask } from "@/pages/ListTask";
+import { Task } from "@/pages/Task";
 
 export const router = createBrowserRouter([
   {

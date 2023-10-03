@@ -1,15 +1,15 @@
 import { Button, Grid } from "@mui/material";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
-import { ITask } from "../../interfaces/task.interface";
-import { DatePicker } from "../../components/DatePicker";
-import { PriorityEnum } from "../../enums/priority.enum";
-import { Select } from "../../components/Select/index";
-import { InputText } from "../../components/InputText";
+import { ITask } from "@/interfaces/task.interface";
+import { DatePicker } from "@/components/DatePicker";
+import { PriorityEnum } from "@/enums/priority.enum";
+import { Select } from "@/components/Select/index";
+import { InputText } from "@/components/InputText";
 import { priorityItems } from "./priorityItems";
 import dayjs from "dayjs";
 import { useMutation } from "react-query";
-import { TaskService } from "../../services/task.service";
-import {  useEffect } from "react";
+import { TaskService } from "@/services/task.service";
+import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { validationSchema } from "./validations";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -56,7 +56,7 @@ export const Task: React.FC<IProps> = () => {
     if (idTask) {
       updateTask.mutate({ ...data, id: Number(idTask) });
     } else {
-     const response = await createTask.mutateAsync(data);
+      const response = await createTask.mutateAsync(data);
 
       if (response) {
         navigate("/");

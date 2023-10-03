@@ -8,15 +8,15 @@ import {
   ptBR,
 } from "@mui/x-data-grid";
 
-import { ITask } from "../../interfaces/task.interface";
+import { ITask } from "@/interfaces/task.interface";
 import { columns } from "./columns";
 import { useQuery } from "react-query";
-import { TaskService } from "../../services/task.service";
+import { TaskService } from "@/services/task.service";
 import { Link, useNavigate } from "react-router-dom";
-import { ModalConfirm } from "../../components/ModalConfirm";
+import { ModalConfirm } from "@/components/ModalConfirm";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
-import { ITaskCompletion } from "../../interfaces/taskCompletation.interface";
+import { ITaskCompletion } from "@/interfaces/taskCompletation.interface";
 import { IProps } from "./interfaces/props.interface";
 
 const taskService = new TaskService();
