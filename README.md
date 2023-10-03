@@ -16,6 +16,9 @@ Tecnologias Utilizadas
 * React Toastify (v9.1.3) - Toastify 
 * Dayjs (v1.3.2) - Modern date utilities
 
+
+##### Link Deployment for bohr.io: [Task Manager](https://github.com/RafaelCardoso11/backend-task-manager-nestJS)
+
 ## Task manager
 
 Repositório Backend
@@ -26,6 +29,37 @@ Repositório Backend
 2) Visualizar novas tarefas (List and ReadOne)
 3) Editar tarefas (Update)
 4) Marcar como concluída as tarefas (Completion)
+
+
+## Inicialização do Projeto
+
+### Pré-requisitos
+
+Certifique-se de que você tenha o Node.js (v18.16.1) e o Yarn(v1.22.19) instalados em sua máquina. Você pode verificar a instalação executando os seguintes comandos no terminal:
+
+```bash
+node -v 
+yarn -v
+```
+
+### Inicialização
+1. **Navegue para a pasta do projeto:** Use o comando `cd` para entrar na pasta do projeto onde está localizado o arquivo `package.json`.
+
+```bash
+cd caminho-para-o-seu-projeto
+```
+2. **Instale as dependências:**
+```bash
+yarn install
+```
+3. **Inicie o servidor de desenvolvimento:**
+```bash
+yarn dev
+```
+
+``yarn ``
+``ReactJS ``
+``Vite``
 
 Qualquer dúvida estou a disposição.
 
