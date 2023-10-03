@@ -17,7 +17,7 @@ Tecnologias Utilizadas
 * Dayjs (v1.3.2) - Modern date utilities
 
 
-##### Link Deployment for bohr.io: [Task Manager](https://github.com/RafaelCardoso11/backend-task-manager-nestJS)
+##### Link Deployment for bohr.io: [Task Manager](https://task-manager.bohr.io/)
 
 ## Task manager
 
