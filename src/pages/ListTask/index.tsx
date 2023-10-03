@@ -1,5 +1,5 @@
 import { Box, Button, Grid, IconButton } from "@mui/material";
-import { ReactNode, useState } from "react";
+import {  useState } from "react";
 
 import {
   DataGrid,
@@ -17,12 +17,10 @@ import { ModalConfirm } from "../../components/ModalConfirm";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import { ITaskCompletion } from "../../interfaces/taskCompletation.interface";
+import { IProps } from "./interfaces/props.interface";
 
 const taskService = new TaskService();
-interface props {
-  children?: ReactNode;
-}
-export const ListTask: React.FC<props> = () => {
+export const ListTask: React.FC<IProps> = () => {
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [openConfirmDeleteTask, setOpenConfirmDeleteTask] =
     useState<boolean>(false);
@@ -35,9 +33,10 @@ export const ListTask: React.FC<props> = () => {
     taskService.findAll,
     {
       onSuccess(tasks) {
-        setSelectedRows(
-          tasks.filter(({ completed }) => completed).map(({ id }) => Number(id))
-        );
+        const completedTaskIds = tasks
+          .filter(({ completed }) => completed)
+          .map(({ id }) => Number(id));
+        setSelectedRows(completedTaskIds);
       },
     }
   );
@@ -73,6 +72,11 @@ export const ListTask: React.FC<props> = () => {
     }
   };
 
+  const handleOpenModalConfirmDeleteTask = async (id: number) => {
+    setIdTask(id);
+    setOpenConfirmDeleteTask(true);
+  };
+
   return (
     <Grid item>
       <Box height="65vh">
@@ -99,8 +103,7 @@ export const ListTask: React.FC<props> = () => {
                     <IconButton
                       color="error"
                       onClick={() => {
-                        setIdTask(Number(id));
-                        setOpenConfirmDeleteTask(true);
+                        handleOpenModalConfirmDeleteTask(Number(id));
                       }}
                     >
                       <GridDeleteIcon />
