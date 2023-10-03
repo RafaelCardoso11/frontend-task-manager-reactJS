@@ -9,18 +9,14 @@ import { priorityItems } from "./priorityItems";
 import dayjs from "dayjs";
 import { useMutation } from "react-query";
 import { TaskService } from "../../services/Task";
-import { ReactNode, useEffect } from "react";
+import {  useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { validationSchema } from "./validations";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { IProps } from "./interfaces/props.interface";
 
 const taskService = new TaskService();
-
-interface props {
-  children?: ReactNode;
-}
-
-export const Task: React.FC<props> = () => {
+export const Task: React.FC<IProps> = () => {
   const { id: idTask } = useParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
