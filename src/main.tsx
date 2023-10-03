@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { ThemeProvider } from 'styled-components'
-import theme from './themes/default.ts'
+import theme from './themes/default.theme.ts'
 import { CssBaseline } from '@mui/material'
 import 'react-toastify/dist/ReactToastify.css';
 

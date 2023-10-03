@@ -1,19 +1,19 @@
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker as MuiDatePicker } from "@mui/x-date-pickers/DatePicker";
-import { props } from "./interfaces/props";
+import { IProps } from "./interfaces/props.interface";
 import { ptBR } from "@mui/x-date-pickers";
 import { Controller } from "react-hook-form";
 import { FormControl, FormHelperText } from "@mui/material";
 import dayjs from "dayjs";
 
-export const DatePicker = ({
+export const DatePicker: React.FC<IProps> = ({
   control,
   name,
   label,
   minDate,
   disabled,
-}: props) => {
+}) => {
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}

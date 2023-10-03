@@ -11,7 +11,7 @@ import {
 import { ITask } from "../../interfaces/task.interface";
 import { columns } from "./columns";
 import { useQuery } from "react-query";
-import { TaskService } from "../../services/Task";
+import { TaskService } from "../../services/task.service";
 import { Link, useNavigate } from "react-router-dom";
 import { ModalConfirm } from "../../components/ModalConfirm";
 import VisibilityIcon from "@mui/icons-material/Visibility";

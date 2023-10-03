@@ -3,15 +3,15 @@ import { ITask, ITaskKeyOf } from "../../../interfaces/task.interface";
 
 
 
-interface Item {
+interface IItem {
     value: string;
     label: string
 }
 
-export interface props {
+export interface IProps {
     label: string;
     name: ITaskKeyOf;
-    items: Item[],
+    items: IItem[],
     control: Control<ITask>;
     disabled?: boolean;
 }

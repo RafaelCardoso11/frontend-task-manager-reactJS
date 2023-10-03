@@ -5,9 +5,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { props } from "./interfaces/props";
+import { IProps } from "./interfaces/props.interface";
 
-export const ModalConfirm: React.FC<props> = ({
+export const ModalConfirm: React.FC<IProps> = ({
   open,
   setOpen,
   title,

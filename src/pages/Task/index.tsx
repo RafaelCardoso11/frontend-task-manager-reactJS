@@ -8,7 +8,7 @@ import { InputText } from "../../components/InputText";
 import { priorityItems } from "./priorityItems";
 import dayjs from "dayjs";
 import { useMutation } from "react-query";
-import { TaskService } from "../../services/Task";
+import { TaskService } from "../../services/task.service";
 import {  useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { validationSchema } from "./validations";

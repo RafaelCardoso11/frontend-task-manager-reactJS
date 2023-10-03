@@ -1,21 +1,21 @@
 import { Controller } from "react-hook-form";
-import { props } from "./interfaces/props";
+import { IProps } from "./interfaces/props.interface";
 import { FormControl, FormHelperText, TextField } from "@mui/material";
 
-export const InputText = ({
+export const InputText: React.FC<IProps> = ({
   control,
   label,
   name,
   minRows = 4,
   multiline = false,
   disabled = false,
-}: props) => {
+}) => {
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState }) => {
-        const value = (field.value ?? '');
+        const value = field.value ?? "";
 
         return (
           <FormControl fullWidth>

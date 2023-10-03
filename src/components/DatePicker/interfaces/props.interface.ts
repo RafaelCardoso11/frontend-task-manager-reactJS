@@ -2,7 +2,7 @@ import { Control } from "react-hook-form";
 import { ITask, ITaskKeyOf } from "../../../interfaces/task.interface";
 import { Dayjs } from "dayjs";
 
-export interface props {
+export interface IProps {
   label: string;
   control: Control<ITask>;
   name: ITaskKeyOf;

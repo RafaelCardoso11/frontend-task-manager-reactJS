@@ -4,10 +4,16 @@ import {
   MenuItem,
   Select as MuiSelect,
 } from "@mui/material";
-import { props } from "./interfaces/props";
+import { IProps } from "./interfaces/props.interface";
 import { Controller } from "react-hook-form";
 
-export const Select = ({ control, name, label, items, disabled = false }: props) => {
+export const Select: React.FC<IProps> = ({
+  control,
+  name,
+  label,
+  items,
+  disabled = false,
+}) => {
   return (
     <Controller
       name={name}
@@ -23,7 +29,9 @@ export const Select = ({ control, name, label, items, disabled = false }: props)
             disabled={disabled}
           >
             {items.map(({ value, label }) => (
-              <MenuItem  key={value+label} value={value}>{label}</MenuItem>
+              <MenuItem key={value + label} value={value}>
+                {label}
+              </MenuItem>
             ))}
           </MuiSelect>
         </FormControl>
