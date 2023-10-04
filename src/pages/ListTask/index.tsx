@@ -18,6 +18,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import { ITaskCompletion } from "@/interfaces/taskCompletation.interface";
 import { IProps } from "./interfaces/props.interface";
+import { toast } from "react-toastify";
 
 const taskService = new TaskService();
 export const ListTask: React.FC<IProps> = () => {
@@ -75,6 +76,14 @@ export const ListTask: React.FC<IProps> = () => {
   const handleOpenModalConfirmDeleteTask = async (id: number) => {
     setIdTask(id);
     setOpenConfirmDeleteTask(true);
+  };
+
+  const handleRefreshTasks = async () => {
+    const { isSuccess } = await refetch();
+
+    if (isSuccess) {
+      toast("Tarefas atualizadas com sucesso!", { type: "success" });
+    }
   };
 
   return (
@@ -145,12 +154,12 @@ export const ListTask: React.FC<IProps> = () => {
             size="large"
             color="warning"
             fullWidth
-            onClick={() => refetch()}
+            onClick={handleRefreshTasks}
           >
             Atualizar dados
           </Button>
         </Grid>
-        <Grid item xs={12}  sm="auto">
+        <Grid item xs={12} sm="auto">
           <Button
             variant="contained"
             size="large"
