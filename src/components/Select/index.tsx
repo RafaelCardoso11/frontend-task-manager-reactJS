@@ -5,15 +5,15 @@ import {
   Select as MuiSelect,
 } from "@mui/material";
 import { IProps } from "./interfaces/props.interface";
-import { Controller } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 
-export const Select: React.FC<IProps> = ({
+export const Select = <IType extends FieldValues>({
   control,
   name,
   label,
   items,
   disabled = false,
-}) => {
+}: IProps<IType>) => {
   return (
     <Controller
       name={name}

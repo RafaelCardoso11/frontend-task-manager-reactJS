@@ -1,11 +1,10 @@
-import { Control } from "react-hook-form";
-import { ITask, ITaskKeyOf } from "@/interfaces/task.interface";
+import { Control, FieldPath, FieldValues } from "react-hook-form";
 import { Dayjs } from "dayjs";
 
-export interface IProps {
+export interface IProps<IType extends FieldValues = FieldValues> {
   label: string;
-  control: Control<ITask>;
-  name: ITaskKeyOf;
+  control: Control<IType>;
+  name: FieldPath<IType>;
   minDate: Dayjs;
   disabled?: boolean;
 }

@@ -1,17 +1,13 @@
-import { Control } from "react-hook-form";
-import { ITask, ITaskKeyOf } from "@/interfaces/task.interface";
-
-
-
+import { Control, FieldPath, FieldValues } from "react-hook-form";
 interface IItem {
     value: string;
     label: string
 }
 
-export interface IProps {
+export interface IProps<IType extends FieldValues = FieldValues> {
     label: string;
-    name: ITaskKeyOf;
     items: IItem[],
-    control: Control<ITask>;
+    control: Control<IType>;
+    name: FieldPath<IType>;
     disabled?: boolean;
 }

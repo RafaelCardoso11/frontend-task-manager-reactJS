@@ -1,15 +1,16 @@
-import { Controller } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 import { IProps } from "./interfaces/props.interface";
 import { FormControl, FormHelperText, TextField } from "@mui/material";
 
-export const InputText: React.FC<IProps> = ({
+export const InputText = <IType extends FieldValues>({
   control,
   label,
   name,
   minRows = 4,
   multiline = false,
   disabled = false,
-}) => {
+  type ='text'
+}: IProps<IType>) => {
   return (
     <Controller
       name={name}
@@ -27,6 +28,8 @@ export const InputText: React.FC<IProps> = ({
               multiline={multiline}
               disabled={disabled}
               minRows={minRows}
+              autoComplete='off'
+              type={type}
               fullWidth
             />
             {fieldState.error ? (
