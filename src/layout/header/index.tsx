@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Badge,
   Grid,
   IconButton,
@@ -9,9 +8,20 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Logout } from "@mui/icons-material";
+import { useAuth } from "@/contexts/auth/services/useAuth";
+import { UserAvatar } from "@/components/UserAvatar";
+import { ModalConfirm } from "@/components/ModalConfirm";
+import { useState } from "react";
 
 export const Header = () => {
   const theme = useTheme();
+  const { logout, user } = useAuth();
+  const [openConfirmLogout, setOpenConfirmLogout] = useState<boolean>(false);
+
+  const handleOpenModalConfirmLogout = () => {
+    setOpenConfirmLogout(true);
+  };
   return (
     <Toolbar
       style={{
@@ -28,20 +38,43 @@ export const Header = () => {
           </IconButton>
         </Grid>
 
-        <Grid item >
+        <Grid item>
           <IconButton color="inherit">
-            <Badge badgeContent={4} style={{ color: "white", marginRight: 10 }}>
+            <Badge
+              badgeContent={user.username.length}
+              style={{ color: "white", marginRight: 10 }}
+            >
               <NotificationsIcon />
             </Badge>
           </IconButton>
           <IconButton color="inherit">
-            <Avatar
-              alt="User Avatar"
-              src="https://media.licdn.com/dms/image/D4D03AQG534wNPHhang/profile-displayphoto-shrink_800_800/0/1682369927317?e=1701302400&v=beta&t=amZkkrDQVCGWy7HvQEmMCoewa1EZOPcaYmoNF_e_I_Q"
-            />
+            <Typography
+              component="span"
+              variant="body1"
+              color="white"
+              marginRight={1}
+            >
+              @{user.username}
+            </Typography>
+            <UserAvatar />
+          </IconButton>
+          <IconButton
+            style={{ color: "white" }}
+            onClick={handleOpenModalConfirmLogout}
+          >
+            <Logout />
           </IconButton>
         </Grid>
       </Grid>
+
+      <ModalConfirm
+        title="Sair"
+        body="Você realmente deseja sair da gestão de tarefas?"
+        handleConfirm={logout}
+        btnConfirmText="Sair"
+        open={openConfirmLogout}
+        setOpen={setOpenConfirmLogout}
+      />
     </Toolbar>
   );
 };
