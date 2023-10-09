@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
-import { MainProps } from "../interfaces/main-props.interface";
+import { MainProps } from "../../layout/interfaces/main-props.interface";
 
-export const Main: React.FC<MainProps> = ({ title, subtitle, element }) => {
+export const BaseMainLayout: React.FC<MainProps> = ({ title, subtitle, element }) => {
   return (
     <Grid
       style={{

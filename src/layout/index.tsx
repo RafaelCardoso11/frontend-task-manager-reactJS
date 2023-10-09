@@ -1,12 +1,11 @@
 import { Divider, Grid, useMediaQuery } from "@mui/material";
 import { Header } from "./header";
 import { Sidebar } from "./sidebar";
-import { Main } from "./main";
 import { Footer } from "./footer";
 import React from "react";
 import { LayoutProps } from "./interfaces/layout-props.interface";
 
-export const Layout: React.FC<LayoutProps> = ({ main }) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const matches = useMediaQuery("(min-width:900px)");
   return (
     <Grid container>
@@ -26,7 +25,7 @@ export const Layout: React.FC<LayoutProps> = ({ main }) => {
           </Grid>
         ) : null}
         <Grid xs={12} sm={12} md={10} lg={10} item height="100%">
-          <Main {...main} />
+          {children}
         </Grid>
       </Grid>
       <Grid container justifyContent="center" alignItems="center">

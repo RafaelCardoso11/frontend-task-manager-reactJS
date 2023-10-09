@@ -4,7 +4,7 @@ import { ListTask } from "@/pages/ListTask";
 import { Task } from "@/pages/Task";
 import { Sign } from "./pages/Sign";
 import { ProtectedElement } from "./contexts/auth/components/ProtectedElement";
-import { Layout } from "./layout";
+import { BaseMainLayout } from "./components/BaseMainLayout";
 
 export const routers = [
   <Route key="login" path="/login" element={<Sign />} />,
@@ -14,13 +14,10 @@ export const routers = [
     key="list"
     element={
       <ProtectedElement>
-        <Layout
-          main={{
-            title: "Listagem de Tarefas",
-            subtitle:
-              "A página de listagem de tarefas exibe todas as tarefas disponíveis. Você pode marcar uma tarefa como concluída, visualizar os detalhes da tarefa, editá-la, excluí-la e adicionar novas tarefas.",
-            element: <ListTask />,
-          }}
+        <BaseMainLayout
+          title="Listagem de Tarefas"
+          subtitle="A página de listagem de tarefas exibe todas as tarefas disponíveis. Você pode marcar uma tarefa como concluída, visualizar os detalhes da tarefa, editá-la, excluí-la e adicionar novas tarefas."
+          element={<ListTask />}
         />
       </ProtectedElement>
     }
@@ -30,13 +27,10 @@ export const routers = [
     path="/criar"
     element={
       <ProtectedElement>
-        <Layout
-          main={{
-            title: "Cadastro de Tarefas",
-            subtitle:
-              "Para adicionar uma nova tarefa, você pode usar um formulário para inserir os detalhes da tarefa, como título, descrição e data de vencimento. Após preencher os campos, clique no botão 'Cadastrar Tarefa' para criar a nova tarefa.",
-            element: <Task />,
-          }}
+        <BaseMainLayout
+          title="Cadastro de Tarefas"
+          subtitle="Para adicionar uma nova tarefa, você pode usar um formulário para inserir os detalhes da tarefa, como título, descrição e data de vencimento. Após preencher os campos, clique no botão 'Cadastrar Tarefa' para criar a nova tarefa."
+          element={<Task />}
         />
       </ProtectedElement>
     }
@@ -46,12 +40,10 @@ export const routers = [
     path="/visualizar/:id"
     element={
       <ProtectedElement>
-        <Layout
-          main={{
-            title: "Visualização da Tarefa",
-            subtitle: "Você pode ver os detalhes de uma tarefa específica.",
-            element: <Task />,
-          }}
+        <BaseMainLayout
+          title="Visualização da Tarefa"
+          subtitle="Você pode ver os detalhes de uma tarefa específica."
+          element={<Task />}
         />
       </ProtectedElement>
     }
@@ -59,16 +51,12 @@ export const routers = [
   <Route
     key="edit"
     path="/editar/:id"
-    errorElement={<>error</>}
     element={
       <ProtectedElement>
-        <Layout
-          main={{
-            title: "Editar Tarefa",
-            subtitle:
-              "Para editar uma tarefa existente, clique no botão 'Editar Tarefa'. Isso permitirá que você faça alterações nos detalhes da tarefa, como título, descrição e data de vencimento.",
-            element: <Task />,
-          }}
+        <BaseMainLayout
+          title="Editar Tarefa"
+          subtitle="Para editar uma tarefa existente, clique no botão 'Editar Tarefa'. Isso permitirá que você faça alterações nos detalhes da tarefa, como título, descrição e data de vencimento."
+          element={<Task />}
         />
       </ProtectedElement>
     }

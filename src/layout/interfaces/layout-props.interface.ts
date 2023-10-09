@@ -1,5 +1,5 @@
-import { MainProps } from "./main-props.interface";
+import { ReactNode } from "react";
 
 export interface LayoutProps {
-  main: MainProps;
+  children: ReactNode;
 }

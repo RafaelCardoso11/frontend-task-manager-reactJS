@@ -22,6 +22,10 @@ export const Header = () => {
   const handleOpenModalConfirmLogout = () => {
     setOpenConfirmLogout(true);
   };
+  const handleConfirmLogout = () => {
+    logout();
+    setOpenConfirmLogout(false);
+  };
   return (
     <Toolbar
       style={{
@@ -52,17 +56,25 @@ export const Header = () => {
               component="span"
               variant="body1"
               color="white"
-              marginRight={1}
+              marginRight={2}
             >
               @{user.username}
             </Typography>
-            <UserAvatar />
+            {user.username && <UserAvatar name={user.username} />}
           </IconButton>
           <IconButton
-            style={{ color: "white" }}
+            style={{ color: "white", marginLeft: 10 }}
             onClick={handleOpenModalConfirmLogout}
           >
-            <Logout />
+            <Typography
+              component="span"
+              variant="body1"
+              color="white"
+              marginRight={1}
+            >
+             Sair
+            </Typography>
+            <Logout  />
           </IconButton>
         </Grid>
       </Grid>
@@ -70,7 +82,7 @@ export const Header = () => {
       <ModalConfirm
         title="Sair"
         body="Você realmente deseja sair da gestão de tarefas?"
-        handleConfirm={logout}
+        handleConfirm={handleConfirmLogout}
         btnConfirmText="Sair"
         open={openConfirmLogout}
         setOpen={setOpenConfirmLogout}

@@ -9,6 +9,7 @@ export const validationSchema = yup.object().shape({
     .required("O Nome de Usuário é obrigatório."),
   email: yup
     .string()
+    .email('Insira um E-mail válido')
     .max(127, "O máximo de caractéres permitidos nesse campo são 127")
     .optional(),
   password: yup
