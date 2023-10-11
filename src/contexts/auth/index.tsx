@@ -23,7 +23,8 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem(KEY_USER) as string);
-    setUser(user);
+
+    if(user) setUser(user);
   }, []);
   
 
