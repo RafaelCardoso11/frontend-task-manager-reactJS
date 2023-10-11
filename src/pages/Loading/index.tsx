@@ -7,10 +7,18 @@ export const Loading: React.FC<IProps> = () => {
   return (
     <Box
       sx={{
-        marginTop: 8,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        position: "fixed",
+        width: "100vw",
+        height: "100vh",
+        top: 0,
+        left: 0,
+        justifyContent: "flex-start",
+        paddingTop: 15,
+        backgroundColor: "white",
+        zIndex: 100,
       }}
     >
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
