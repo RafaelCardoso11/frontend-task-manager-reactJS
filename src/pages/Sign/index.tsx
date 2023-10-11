@@ -47,6 +47,8 @@ export const Sign: React.FC<IProps> = () => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
+ 
+
   return (
     <Box
       sx={{
@@ -66,7 +68,7 @@ export const Sign: React.FC<IProps> = () => {
     >
       <Box
         component="form"
-        sx={{ m:3 }}
+        sx={{ m: 3 }}
         onSubmit={handleSubmit(onSubmit)}
         style={{
           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
@@ -74,7 +76,14 @@ export const Sign: React.FC<IProps> = () => {
           padding: 30,
         }}
       >
-        <Grid container alignItems="center" justifyContent="center" display="flex" flexDirection="column" marginBottom={2} >
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
+          display="flex"
+          flexDirection="column"
+          marginBottom={2}
+        >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <Task />
           </Avatar>

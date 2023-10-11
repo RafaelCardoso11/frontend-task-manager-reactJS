@@ -33,7 +33,7 @@ export const Header = () => {
       }}
     >
       <Grid container alignItems="center" justifyContent="space-around">
-        <Grid item  md={8} sm={6} xs={12}>
+        <Grid item md={8} sm={6} xs={12}>
           <IconButton edge="start" style={{ color: "white", gap: 10 }}>
             <MenuIcon />
             <Typography component="h1" variant="h6" color="white">
@@ -42,7 +42,14 @@ export const Header = () => {
           </IconButton>
         </Grid>
 
-        <Grid item  md={4} sm={6} xs={12}>
+        <Grid
+          item
+          container
+          justifyContent="flex-end"
+          md={4}
+          sm={6}
+          xs={12}
+        >
           <IconButton color="inherit">
             <Badge
               badgeContent={user.username.length}
@@ -72,9 +79,9 @@ export const Header = () => {
               color="white"
               marginRight={1}
             >
-             Sair
+              Sair
             </Typography>
-            <Logout  />
+            <Logout />
           </IconButton>
         </Grid>
       </Grid>
