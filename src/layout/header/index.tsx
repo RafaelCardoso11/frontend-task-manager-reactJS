@@ -32,8 +32,8 @@ export const Header = () => {
         backgroundColor: theme.palette.primary.main,
       }}
     >
-      <Grid container alignItems="center" justifyContent="space-between ">
-        <Grid item xs={8}>
+      <Grid container alignItems="center" justifyContent="space-around">
+        <Grid item  md={8} sm={6} xs={12}>
           <IconButton edge="start" style={{ color: "white", gap: 10 }}>
             <MenuIcon />
             <Typography component="h1" variant="h6" color="white">
@@ -42,7 +42,7 @@ export const Header = () => {
           </IconButton>
         </Grid>
 
-        <Grid item>
+        <Grid item  md={4} sm={6} xs={12}>
           <IconButton color="inherit">
             <Badge
               badgeContent={user.username.length}

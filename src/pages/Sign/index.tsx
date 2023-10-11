@@ -66,7 +66,7 @@ export const Sign: React.FC<IProps> = () => {
     >
       <Box
         component="form"
-        sx={{ mt: 3 }}
+        sx={{ m:3 }}
         onSubmit={handleSubmit(onSubmit)}
         style={{
           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
